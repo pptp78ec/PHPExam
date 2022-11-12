@@ -7,6 +7,7 @@ use App\Http\Controllers\UsersController;
 use App\Models\Booking;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,16 +22,16 @@ Route::resource('/movies', MoviesController::class);
 Route::resource('/moviesessions', MovieSessionsController::class);
 Route::resource('/booking', BookingController::class);
 Route::resource('/users', UsersController::class);
-Route::post('authenticate', [UsersController::class, 'authenticate'])->name('users.authenticate');
+// Route::post('authenticate', [UsersController::class, 'authenticate'])->name('users.authenticate');
 Route::get('/', function () {
     return redirect('/movies');
 });
-Route::get('/login', function () {
-    return view('login');
-});
-Route::get('/register', function () {
-    return view('register');
-});
+// Route::get('/login', function () {
+//     return view('login');
+// });
+// Route::get('/register', function () {
+//     return view('register');
+// });
 
 
 Auth::routes();

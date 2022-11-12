@@ -7,6 +7,8 @@ use App\Models\Movies;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Nette\Utils\DateTime;
+use Illuminate\Support\Facades\Auth;
+
 
 class MovieSessionsController extends Controller
 {
@@ -18,7 +20,15 @@ class MovieSessionsController extends Controller
     public function index()
     {
         $movies = Movies::all();
-        $sessions = MovieSessions::paginate(10);
+        $sessions = $sessions = DB::table('movie_sessions')
+        ->where('movieid', '=', $id)
+        ->get();
+        if(Auth::user()->isadmin){
+            $movies = Movies::all(); 
+            $sessions = MovieSessions::paginate(10);
+        }
+        
+       
         return view('moviesessions.index', compact('sessions', 'movies'));
     }
 

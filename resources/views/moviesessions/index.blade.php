@@ -1,5 +1,5 @@
 @extends('..\layout\layoutms')
-@section('content')
+@section('content1')
         <table class="table">
           <thead class="thead-dark">
             <tr>
@@ -19,6 +19,7 @@
               <td>{{$item->timestart}}</td>
               <td>{{$item->timeend}}</td>
               <td>{{$movies->find($item->movieid)->name}}</td>
+              <td><form method="GET" action={{route('moviesessions.edit',$item->id)}}><button type="submit" class="btn btn-primary">Edit</button></form></td>
               <td><form method="GET" action={{route('moviesessions.edit',$item->id)}}><button type="submit" class="btn btn-primary">Edit</button></form></td>
             </tr>
             @endforeach

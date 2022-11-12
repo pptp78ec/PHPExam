@@ -1,5 +1,5 @@
-@extends('..\layout\layoutm')
-@section('content')
+@extends('..\layout\layoutms')
+@section('content1')
             <form method="POST" action="{{route('moviesessions.update', $session->id)}}">
                 @csrf
                 @method('PATCH');

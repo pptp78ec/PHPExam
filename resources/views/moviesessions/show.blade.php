@@ -1,5 +1,5 @@
 @extends('..\layout\layoutms')
-@section('content')
+@section('content1')
         <h3>Sessions for {{$movie->name}}</h3>
         <table class="table">
           <thead class="thead-dark">

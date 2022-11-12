@@ -18,9 +18,8 @@ class MoviesController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
         $movies = Movies::paginate(10);
-        return view('movies.index', compact('movies', 'user'));
+        return view('movies.index', compact('movies'));
     }
 
     /**

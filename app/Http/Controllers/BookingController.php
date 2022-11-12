@@ -45,9 +45,12 @@ class BookingController extends Controller
      * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function show(Booking $booking)
+    public function show($id)
     {
-        //
+        //shows booked tickets for a user
+        $bookings = DB::table('movie_sessions')
+                    ->where('movieid', '=', $id)
+                    ->get();
     }
 
     /**

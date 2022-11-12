@@ -1,5 +1,5 @@
 @extends('..\layout\layoutm')
-@section('content')
+@section('content1')
             <div class="cnt_sh_mv">
                 <img src="../{{$movie->imagepath}}">
                 <h3>{{$movie->name}}</h3>

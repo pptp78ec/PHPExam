@@ -1,5 +1,5 @@
 @extends('..\layout\layoutm')
-@section('content')
+@section('content1')
             <form method="POST" action="{{route('movies.update', $movie->id)}}">
                 @csrf
                 @method('PATCH');

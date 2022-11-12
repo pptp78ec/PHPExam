@@ -1,5 +1,5 @@
 @extends('..\layout\layoutm')
-@section('content')
+@section('content1')
             <form method="POST" action="{{route('movies.store')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group" >

@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::resource('/movies', MoviesController::class);
 Route::resource('/moviesessions', MovieSessionsController::class);
-Route::resource('/booking', BookingController::class);
+Route::resource('/booking', BookingController::class)->middleware('auth');
 Route::resource('/users', UsersController::class);
 // Route::post('authenticate', [UsersController::class, 'authenticate'])->name('users.authenticate');
 Route::get('/', function () {

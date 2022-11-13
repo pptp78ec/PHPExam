@@ -19,9 +19,9 @@ return new class extends Migration
             $table->integer('length');
             $table->string('genre',20);
             $table->string('imagepath',500);
-            $table->string('director');
+            $table->string('director',80);
             $table->date('premiere');
-            $table->string('descr');
+            $table->string('descr',1000);
             $table->timestamps();
         });
     }

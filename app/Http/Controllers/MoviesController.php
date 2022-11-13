@@ -40,6 +40,17 @@ class MoviesController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate(
+            [
+                'name' =>'required|max:50',
+                'length' =>'required',
+                'genre' =>'required|max:20',
+                'imagepath' => 'required',
+                'director' => 'required|max:80',
+                'premiere' => 'required',
+                'descr'=> 'required|max:1000',
+            ]
+        );
         $movie = new Movies();
         $savedpath = "";
         if($request->hasFile('imagepath')){
@@ -96,6 +107,17 @@ class MoviesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validated = $request->validate(
+            [
+                'name' =>'required|max:50',
+                'length' =>'required',
+                'genre' =>'required|max:20',
+                'imagepath' => 'required',
+                'director' => 'required|max:80',
+                'premiere' => 'required',
+                'descr'=> 'required|max:1000',
+            ]
+        );
         $movie = Movies::find($id);
         $savedpath = "";
         if($request->hasFile('imagepath')){

@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\Movies;
+use App\Models\User;
+use App\Models\MovieSessions;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class BookingController extends Controller
 {
@@ -16,9 +21,9 @@ class BookingController extends Controller
     {
         $movies = Movies::all();
         $moviesessions = Moviesessions::all();
-        $users = Users::all();
+        $users = User::all();
         $bookings = Booking::paginate(20);
-        return view('booking.index', compact('boookings', 'moviesessions', 'users', 'movies'));
+        return view('booking.index', compact('bookings', 'moviesessions', 'users', 'movies'));
     }
 
     /**
@@ -39,6 +44,12 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate(
+            [
+                'userid' =>'required',
+                'moviesessionid' =>'required',
+            ]
+        );
         $booking = new Booking();
         $booking->userid = $request->get('userid');
         $booking->moviesessionid = $request->get('moviesessionid');
@@ -57,11 +68,11 @@ class BookingController extends Controller
         //shows booked tickets for a user
         $movies = Movies::all();
         $moviesessions = Moviesessions::all();
-        $user = Users::find($id);
+        $user = User::find($id);
         $bookings = DB::table('bookings')
                     ->where('userid', '=', $id)
-                    ->get()->paginate(20);
-                    return view('bookings.show', compact('bookings', 'user', 'moviesessions','movies'));
+                    ->paginate(20);
+                    return view('booking.show', compact('bookings', 'user', 'moviesessions','movies'));
     }
 
     /**
@@ -93,8 +104,10 @@ class BookingController extends Controller
      * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Booking $booking)
+    public function destroy($id)
     {
-        //
+        $booking = Booking::find($id);
+        $booking->delete();
+        return Redirect::back();
     }
 }

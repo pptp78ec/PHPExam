@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('movie_sessions', function (Blueprint $table) {
             $table->id();
-            $table->string('place');
+            $table->string('place',50);
             $table->dateTime('timestart');
             $table->dateTime('timeend');
             $table->bigInteger('movieid')->unsigned();

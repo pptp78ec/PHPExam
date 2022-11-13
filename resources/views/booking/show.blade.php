@@ -22,6 +22,5 @@
             @endforeach
           </tbody>
         </table>
-        @endforeach
-  {{ $movies->links() }}
+  {{ $bookings->links() }}
 @endsection

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Nette\Utils\DateTime;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Redirect;
 
 class MovieSessionsController extends Controller
 {
@@ -43,6 +43,14 @@ class MovieSessionsController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate(
+            [
+                'place' =>'required|max:200',
+                'timestart'=>'required',
+                'timeend'=>'required',
+                'movieid'=>'required',
+            ]
+        );
         $session = new MovieSessions();
         $session->place = $request->get('place');
         $session->timestart = date("Y-m-d H:i:s",strtotime($request->get('timestart'))) ;
@@ -91,6 +99,14 @@ class MovieSessionsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validated = $request->validate(
+            [
+                'place' =>'required|max:200',
+                'timestart'=>'required',
+                'timeend'=>'required',
+                'movieid'=>'required',
+            ]
+        );
         $session = MovieSessions::find($id);
         $session->place = $request->get('place');
         $session->timestart = date("Y-m-d H:i:s",strtotime($request->get('timestart'))) ;
@@ -107,8 +123,11 @@ class MovieSessionsController extends Controller
      * @param  \App\Models\MovieSessions  $movieSessions
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MovieSessions $movieSessions)
+    public function destroy($id)
     {
-        //
+        $session = MovieSessions::find($id);
+        $session->delete();
+        return Redirect::back();
+
     }
 }

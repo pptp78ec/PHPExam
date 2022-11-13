@@ -10,6 +10,9 @@
               <th scope="col">Place</th>
               <th scope="col">Session Starts</th>
               <th scope="col">Session Ends</th>
+              @if(Auth::user()->isadmin)
+              <th scope="col">Delete</th>
+              @endif
             </tr>
           </thead>
           <tbody>
@@ -21,11 +24,17 @@
               <td>{{$moviesessions->find($item->moviesessionid)->place}}</td>
               <td>{{$moviesessions->find($item->moviesessionid)->timestart}}</td>
               <td>{{$moviesessions->find($item->moviesessionid)->timeend}}</td>
-              {{-- <td><form method="GET" action={{route('bookings.edit',$item->id)}}><button type="submit" class="btn btn-primary">Edit</button></form></td> --}}
+              @if(Auth::user()->isadmin)
+              <td>
+              <form action="{{ route('booking.destroy', $item->id)}}" method="post">           @csrf
+                @method('DELETE')
+              <button class="btn btn-danger" type="submit">Delete</button>
+              </form>
+              </td>
+              @endif
             </tr>
             @endforeach
           </tbody>
         </table>
-        @endforeach
-  {{ $movies->links() }}
+  {{ $bookings->links() }}
 @endsection

@@ -33,6 +33,7 @@
       <th scope="col">Starts</th>
       <th scope="col">Ends</th>
       <th scope="col">Movie</th>
+      <th scope="col">Order</th>
       @if(Auth::user()->isadmin)
       <th scope="col">Edit</th>
       <th scope="col">Delete</th>
@@ -47,9 +48,20 @@
       <td>{{$item->timestart}}</td>
       <td>{{$item->timeend}}</td>
       <td>{{$movies->find($item->movieid)->name}}</td>
+      <td><form action="{{route('booking.store')}}" method="POST">
+        @csrf
+        <input type="text" name="userid" id="" style="display:none;" value="{{Auth::id()}}">
+        <input type="text" name="moviesessionid" id="" style="display:none;" value="{{$item->id}}">
+        <button type="submit" class="btn btn-primary">Book it!</button>
+      </form>
+      
       @if(Auth::user()->isadmin)
       <td><a href="{{route('moviesessions.edit', $item->id)}}" class="btn btn-primary">Edit</a></td>
-      <td><a href="{{route('moviesessions.destroy', $item->id)}}" class="btn btn-danger">Delete</a></td>
+      <td><form action="{{ route('moviesessions.destroy', $item->id)}}" method="post">           @csrf
+        @method('DELETE')
+      <button class="btn btn-danger" type="submit">Delete</button>
+      </form>
+      </td>
       @endif
     </tr>
     @endforeach

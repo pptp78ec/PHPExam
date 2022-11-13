@@ -30,9 +30,21 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        <a class="nav-link" href="{{ route('movies.index') }}">All movies</a>
                     </ul>
-
+                    <ul class="navbar-nav me-auto">
+                        <a class="nav-link" href="{{ route('moviesessions.index') }}">All sessions</a>
+                    </ul>
+                    @if(Auth::check())
+                    <ul class="navbar-nav me-auto">
+                        <a class="nav-link" href="{{ route('booking.show', Auth::id()) }}">My bookings</a>
+                    </ul>
+                    @if(Auth::user()->isadmin)
+                    <ul class="navbar-nav me-auto">
+                        <a class="nav-link" href="{{ route('booking.index') }}">All bookings</a>
+                    </ul>
+                    @endif
+                    @endif
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->

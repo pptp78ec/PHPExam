@@ -1,11 +1,9 @@
 @extends('..\layout\layoutbk')
 @section('content')
-    <h3>All booked tickets</h3>
+      <h3>My booked tickets</h3>
         <table class="table">
-          <thead class="thead-dark">
-            <tr>
+        <tr>
               <th scope="col">#</th>
-              <th scope="col">User</th>
               <th scope="col">Movie</th>
               <th scope="col">Place</th>
               <th scope="col">Session Starts</th>
@@ -16,12 +14,10 @@
             @foreach ($bookings as $item)
             <tr>
               <td>{{$item->id}}</td>
-              <td>{{$users->find($item->userid)->name}}</td>
               <td>{{$movies->find($moviesessions->find($item->moviesessionid)->movieid)->name}}</td>
               <td>{{$moviesessions->find($item->moviesessionid)->place}}</td>
               <td>{{$moviesessions->find($item->moviesessionid)->timestart}}</td>
               <td>{{$moviesessions->find($item->moviesessionid)->timeend}}</td>
-              {{-- <td><form method="GET" action={{route('bookings.edit',$item->id)}}><button type="submit" class="btn btn-primary">Edit</button></form></td> --}}
             </tr>
             @endforeach
           </tbody>

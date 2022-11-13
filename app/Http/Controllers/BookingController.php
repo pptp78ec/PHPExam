@@ -14,8 +14,11 @@ class BookingController extends Controller
      */
     public function index()
     {
+        $movies = Movies::all();
+        $moviesessions = Moviesessions::all();
+        $users = Users::all();
         $bookings = Booking::paginate(20);
-        return view('booking.index', compact('boookings'));
+        return view('booking.index', compact('boookings', 'moviesessions', 'users', 'movies'));
     }
 
     /**
@@ -36,7 +39,11 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $booking = new Booking();
+        $booking->userid = $request->get('userid');
+        $booking->moviesessionid = $request->get('moviesessionid');
+        $booking->save();
+        return redirect('/movies')->withsuccess('Your ticket is booked');
     }
 
     /**
@@ -48,9 +55,13 @@ class BookingController extends Controller
     public function show($id)
     {
         //shows booked tickets for a user
-        $bookings = DB::table('movie_sessions')
-                    ->where('movieid', '=', $id)
-                    ->get();
+        $movies = Movies::all();
+        $moviesessions = Moviesessions::all();
+        $user = Users::find($id);
+        $bookings = DB::table('bookings')
+                    ->where('userid', '=', $id)
+                    ->get()->paginate(20);
+                    return view('bookings.show', compact('bookings', 'user', 'moviesessions','movies'));
     }
 
     /**

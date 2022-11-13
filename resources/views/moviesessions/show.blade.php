@@ -18,7 +18,15 @@
               <td>{{$item->place}}</td>
               <td>{{$item->timestart}}</td>
               <td>{{$item->timeend}}</td>
-              <td><form action="post"><button type="submit" class="btn btn-primary">Book it!</button></form></td>
+              @if(Auth::check())
+              <td><form action="{{route('bookings.store')}}" >
+                @crsf
+                <input type="text" name="userid" id="" style="visibility: hidden;" value="{{Auth::id()}}">
+                <input type="text" name="moviesessionid" id="" style="visibility: hidden;" value="{{$item->id}}">
+                <button type="submit" class="btn btn-primary">Book it!</button>
+              </form>
+              @endif
+            </td>
             </tr>
             @endforeach
           </tbody>

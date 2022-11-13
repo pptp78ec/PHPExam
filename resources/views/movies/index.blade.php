@@ -1,7 +1,8 @@
 @extends('..\layout\layoutm')
 @section('content1')
-@foreach ($movies as $item)
+
 @guest
+@foreach ($movies as $item)
   <div class="card" style="width: 18rem;">
     <img src={{$item->imagepath}} class="card-img-top" alt="Movie image">
     <div class="card-body">
@@ -9,6 +10,7 @@
       <a href="{{route('movies.show', $item->id)}}" class="btn btn-primary">Details</a>
     </div>
   </div>
+@endforeach
 @else
   @if(Auth::user()->isadmin)
   <table class="table table-striped">
@@ -21,6 +23,7 @@
       <th>Delete</th>
     </thead>
     <tbody>
+      @foreach ($movies as $item)
       <tr>
         <td>{{$item->id}}</td>
         <td>{{$item->name}}</td>
@@ -33,9 +36,11 @@
         </form>
       </td>
       </tr>
+      @endforeach
     </tbody>
   </table>
   @else
+  @foreach ($movies as $item)
   <div class="card" style="width: 18rem;">
     <img src={{$item->imagepath}} class="card-img-top" alt="Movie image">
     <div class="card-body">
@@ -43,8 +48,9 @@
       <a href="{{route('movies.show', $item->id)}}" class="btn btn-primary">Details</a>
     </div>
   </div>
+  @endforeach
   @endif
 @endguest
-@endforeach
+
   {{ $movies->links() }}
 @endsection

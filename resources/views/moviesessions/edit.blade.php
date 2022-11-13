@@ -2,7 +2,7 @@
 @section('content1')
             <form method="POST" action="{{route('moviesessions.update', $session->id)}}">
                 @csrf
-                @method('PATCH');
+                @method('PATCH')
                 <div class="form-group" >
                     <label for="idplace">Place</label>
                     <input type="text" class="form-control" name="place" id="idplace" value="{{$session->place}}" required>
@@ -28,3 +28,12 @@
             </form>
             
 @endsection
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif

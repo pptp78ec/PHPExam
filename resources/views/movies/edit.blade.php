@@ -2,7 +2,7 @@
 @section('content1')
             <form method="POST" action="{{route('movies.update', $movie->id)}}">
                 @csrf
-                @method('PATCH');
+                @method('PATCH')
                 <div class="form-group" >
                     <label for="idname">Name</label>
                     <input type="text" class="form-control" name="name" id="idname" value="{{$movie->name}}" required>
@@ -36,3 +36,12 @@
             </form>
             
 @endsection
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif

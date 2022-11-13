@@ -24,6 +24,14 @@
                     <input type="datetime-local" class="form-control" name="timeend" id="idtimeend" value="{{old('timeend')}}" reqired>
                 </div>
                 <button type="submit" class="btn btn-primary">Save</button>
-            </form>
-            
+            </form>    
 @endsection
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif

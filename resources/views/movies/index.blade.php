@@ -1,6 +1,6 @@
 @extends('..\layout\layoutm')
 @section('content1')
-
+<div style="display: flex;">
 @guest
 @foreach ($movies as $item)
   <div class="card" style="width: 18rem;">
@@ -51,6 +51,6 @@
   @endforeach
   @endif
 @endguest
-
+</div>
   {{ $movies->links() }}
 @endsection
